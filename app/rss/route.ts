@@ -2,6 +2,8 @@ import { baseUrl } from 'app/sitemap'
 import { getBlogPosts } from 'app/blog/utils'
 import { profile } from 'app/content/profile'
 
+export const dynamic = 'force-static'
+
 export async function GET() {
   let allBlogs = await getBlogPosts()
 

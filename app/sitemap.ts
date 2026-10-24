@@ -1,6 +1,8 @@
 import { getBlogPosts } from 'app/blog/utils'
 import { profile } from './content/profile'
 
+export const dynamic = 'force-static'
+
 export const baseUrl = profile.url
 
 export default async function sitemap() {

@@ -12,17 +12,21 @@ The user explicitly selected the Personal introduction layout and then clarified
 
 ## Direction contract
 
-- First viewport: a generous greeting-led introduction with a large italic Isabella, a plain dark sage background, and small LinkedIn/email links beneath the personal introduction. The page introduces a person before presenting roles or dates. The user's later instruction explicitly defers elaborate UI and background work.
+- First viewport: a generous greeting-led introduction with a large upright Isabella, a plain dark sage background, and small LinkedIn/email links beneath the personal introduction. The page introduces a person before presenting roles or dates. The user's later instruction explicitly defers elaborate UI and background work and removes italic styling from Isabella's name.
 - The user subsequently requested dark sage. Use #3d5145 as the ground, #f2edda as the main type, #d3dbc9 for secondary copy, and fine #6c7d69 rules. Preserve generous margins and unboxed content.
 - Times New Roman is the requested primary family, with Times and generic serif fallbacks. No font downloads. The fixed dark sage theme is explicitly requested.
-- Work appears below the personal introduction under the exact heading “Experience”. Each minimal row shows role, organization, and year, with precise dates and location revealed through native disclosures. Community and education sit alongside the list. No entrance animation or geographic widget is needed.
+- Work appears below the personal introduction under the exact heading “Experience”. Each minimal row shows role, organization, and year, with precise dates and location revealed through native disclosures. Education sits alongside the list. The user removed the entire Beyond work section, including community details. No entrance animation or geographic widget is needed.
 - Mobile: wrap the greeting and links, stack the lower content, and keep all disclosures keyboard-accessible without horizontal scrolling.
 - Contact is the verified LinkedIn profile and user-supplied isabellafear22@gmail.com, placed as small links below the greeting and introduction. The user confirmed Political Science and Economics and supplied exact About Me copy, including “previously” for the legal assistant role. Do not invent a résumé link, photo, role end date, or responsibilities.
 - Replace starter-specific public metadata and sample posts so template writing is not presented as Isabella's work.
 
 ## Local artwork exploration
 
-The user requested delicate ink flowers/cottages slowly emerging at the bottom and supplied a screenshot as a style reference. After seeing the study, the user explicitly instructed us to use that sketch and animation at the bottom of the site. It is therefore included in production: a clearly labelled illustrative study, generated with the built-in image tool, with a nine-second scattered-ink reveal. The image is raster and the effect does not claim to reproduce original pen-stroke order. Replay and reduced-motion handling are included. The site does not attribute the sample image to Isabella.
+The user requested delicate ink flowers/cottages slowly emerging at the bottom and supplied a screenshot as a style reference. After seeing the generated study, the user explicitly selected it for the published site. Their latest refinement removes the “A little ink” heading, caption, and separate panel treatment: the art sits directly on the continuous sage ground. A 48-second reveal follows 606 traced centre-line strokes sequentially; the original raster remains unchanged. This is reconstructed geometry, not original artist pen order. Replay and immediate completion under reduced motion remain. The site does not attribute the study to Isabella. Fine-pointer devices use the user-requested gavel cursor.
+
+## Publishing constraint
+
+Push completed work to the current main branch for the existing Vercel integration. The user controls the separate account isabellafear but cannot create or share its user-site repository now. Prepare a static export and guarded publishing workflow for isabellafear/isabellafear.github.io; do not claim that address is live or replace the functioning Vercel deployment.
 
 ## Review reference
 

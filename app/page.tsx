@@ -1,11 +1,11 @@
-import { experience, leadership, profile } from './content/profile'
+import { experience, profile } from './content/profile'
 import { InkStudy } from './components/ink-study'
 
 export default function Page() {
   return (
     <>
       <section className="introduction" aria-labelledby="greeting">
-        <h1 id="greeting">Hello, I’m <em>Isabella.</em></h1>
+        <h1 id="greeting">Hello, I’m Isabella.</h1>
         <div className="intro-copy">
           <p>
             I’m an aspiring lawyer interested in law, constitutionalism, and
@@ -66,36 +66,7 @@ export default function Page() {
           </ul>
         </section>
 
-        <aside className="personal-notes" aria-label="Education and life beyond work">
-          <section aria-labelledby="beyond-title">
-            <h2 id="beyond-title">Beyond work</h2>
-            <p>
-              Track and field was part of my university life with the Varsity
-              Blues. I’ve also been involved in student-led consulting,
-              fundraising, and supporting women’s representation in sport.
-            </p>
-            <details className="quiet-details">
-              <summary>Community &amp; leadership</summary>
-              <div className="community-details">
-                <h3>SheIS Sports Network</h3>
-                <p className="note-date">Volunteer · December 2022–September 2023</p>
-                <p>Researched sports laws and athlete information while supporting the representation of female athletes.</p>
-                <h3>Team Peru</h3>
-                <p className="note-date">Fundraising Coordinator · August 2018–December 2019</p>
-                <p>Organized fundraising events supporting Kiya Survivors: Mama Cocha.</p>
-                <h3>Model United Nations</h3>
-                <p className="note-date">Deputy Secretary General · February–October 2019</p>
-                <p>Helped host Copenhagen International School’s three-day “Borders” conference, chaired the General Assembly, and directed the staff team.</p>
-                <h3>Student leadership</h3>
-                <ul className="leadership-list">
-                  {leadership.map(([role, organization]) => (
-                    <li key={organization}><span>{role}</span><span>{organization}</span></li>
-                  ))}
-                </ul>
-              </div>
-            </details>
-          </section>
-
+        <aside className="personal-notes" aria-label="Education">
           <section aria-labelledby="education-title">
             <h2 id="education-title">Education</h2>
             <p>University of Toronto</p>

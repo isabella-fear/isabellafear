@@ -2,7 +2,7 @@
 // The introduction's interests and email were supplied directly by the user.
 export const profile = {
   name: 'Isabella Fear',
-  url: 'https://isabellafear.vercel.app',
+  url: process.env.NEXT_PUBLIC_SITE_URL || 'https://isabellafear.vercel.app',
   linkedIn: 'https://www.linkedin.com/in/isabella-fear/',
   email: 'isabellafear22@gmail.com',
   description: 'Isabella Fear is an aspiring lawyer interested in law, constitutionalism, and how knowledge is interpreted and built upon over time.',

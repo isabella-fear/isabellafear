@@ -1,29 +1,45 @@
 'use client'
 
+import Image from 'next/image'
 import { useEffect, useRef, useState } from 'react'
 
-// User-selected generated artwork; provenance is embedded in the PNG.
+type Point = [number, number, number]
+type Stroke = { points: Point[]; length: number }
+type Drawing = { width: number; height: number; paths: Stroke[] }
+
+// The mask follows centre lines traced from the user-selected artwork.
+// Each pen stroke finishes before the next begins; the PNG itself is unchanged.
 export function InkStudy() {
-  const section = useRef<HTMLElement>(null)
+  const figure = useRef<HTMLElement>(null)
   const canvas = useRef<HTMLCanvasElement>(null)
   const replay = useRef<() => void>(() => {})
-  const [status, setStatus] = useState('Ready to draw')
+  const [ready, setReady] = useState(false)
+  const [status, setStatus] = useState('Finished drawing')
 
   useEffect(() => {
     const target = canvas.current
-    if (!target || !section.current) return
+    if (!target || !figure.current) return
     const context = target.getContext('2d')
     if (!context) return
-    const image = new Image()
+    const controller = new AbortController()
+    const image = new window.Image()
     const preference = window.matchMedia('(prefers-reduced-motion: reduce)')
     let frame = 0
     let disposed = false
     let observer: IntersectionObserver | undefined
+    const imageLoaded = new Promise<HTMLImageElement>((resolve, reject) => {
+      image.onload = () => resolve(image)
+      image.onerror = reject
+      image.src = '/studies/ink-study.png'
+    })
 
-    image.onload = () => {
+    Promise.all([
+      imageLoaded,
+      fetch('/studies/ink-strokes.json', { signal: controller.signal })
+        .then((response) => { if (!response.ok) throw new Error('Drawing unavailable'); return response.json() as Promise<Drawing> }),
+    ]).then(([, drawing]) => {
       if (disposed) return
-      const width = Math.min(1200, image.naturalWidth)
-      const height = Math.round(width * image.naturalHeight / image.naturalWidth)
+      const { width, height, paths } = drawing
       target.width = width
       target.height = height
       const mask = document.createElement('canvas')
@@ -31,72 +47,99 @@ export function InkStudy() {
       mask.height = height
       const ink = mask.getContext('2d')
       if (!ink) return
-      const tiles: { x: number; y: number; rank: number }[] = []
-      const size = 10
-      for (let y = 0; y < height; y += size) {
-        for (let x = 0; x < width; x += size) {
-          const seed = Math.sin(x * 12.9898 + y * 78.233) * 43758.5453
-          const random = seed - Math.floor(seed)
-          tiles.push({ x, y, rank: random * 0.61 + (1 - y / height) * 0.14 + x / width * 0.10 })
-        }
-      }
-      const finished = () => {
-        context.clearRect(0, 0, width, height)
+      ink.lineCap = 'round'
+      ink.lineJoin = 'round'
+      ink.strokeStyle = '#fff'
+      const paint = () => {
         context.globalCompositeOperation = 'source-over'
+        context.clearRect(0, 0, width, height)
+        context.drawImage(image, 0, 0, width, height)
+        context.globalCompositeOperation = 'destination-in'
+        context.drawImage(mask, 0, 0)
+        context.globalCompositeOperation = 'source-over'
+      }
+      const showFinished = () => {
+        cancelAnimationFrame(frame)
+        context.globalCompositeOperation = 'source-over'
+        context.clearRect(0, 0, width, height)
         context.drawImage(image, 0, 0, width, height)
         setStatus('Finished drawing')
       }
+      setReady(true)
+      showFinished()
       replay.current = () => {
         cancelAnimationFrame(frame)
-        if (preference.matches) { finished(); return }
-        setStatus('Ink is gathering…')
+        if (preference.matches) { showFinished(); return }
+        ink.clearRect(0, 0, width, height)
+        context.clearRect(0, 0, width, height)
+        setStatus('Drawing stroke by stroke…')
         let started: number | null = null
         let lastPaint = 0
+        let strokeIndex = 0
+        let segmentIndex = 1
+        let from: Point = paths[0].points[0]
+        let spent = 0
+        const penLift = 10
+        const total = paths.reduce((sum, path) => sum + path.length + penLift, 0)
         const draw = (time: number) => {
           if (disposed) return
           if (started === null) started = time
-          const progress = Math.min(1, (time - started) / 9000)
-          if (time - lastPaint > 32 || progress === 1) {
+          const progress = Math.min(1, (time - started) / 48000)
+          if (time - lastPaint >= 32 || progress === 1) {
             lastPaint = time
-            ink.clearRect(0, 0, width, height)
-            for (const tile of tiles) {
-              const value = Math.max(0, Math.min(1, (progress - tile.rank) / 0.15))
-              if (value === 0) continue
-              ink.globalAlpha = value * value * (3 - 2 * value)
-              ink.fillRect(tile.x, tile.y, size + 1, size + 1)
+            const budget = progress === 1 ? Infinity : progress * total
+            while (spent < budget && strokeIndex < paths.length) {
+              const stroke = paths[strokeIndex]
+              if (segmentIndex >= stroke.points.length) {
+                spent += penLift
+                strokeIndex++
+                segmentIndex = 1
+                if (strokeIndex < paths.length) from = paths[strokeIndex].points[0]
+                continue
+              }
+              const to = stroke.points[segmentIndex]
+              const distance = Math.hypot(to[0] - from[0], to[1] - from[1])
+              if (distance < 0.01) { from = to; segmentIndex++; continue }
+              const fraction = Math.min(1, (budget - spent) / distance)
+              const next: Point = [
+                from[0] + (to[0] - from[0]) * fraction,
+                from[1] + (to[1] - from[1]) * fraction,
+                from[2] + (to[2] - from[2]) * fraction,
+              ]
+              ink.lineWidth = (from[2] + next[2]) * 1.15
+              ink.beginPath()
+              ink.moveTo(from[0], from[1])
+              ink.lineTo(next[0], next[1])
+              ink.stroke()
+              spent += distance * fraction
+              from = next
+              if (fraction === 1) segmentIndex++
             }
-            ink.globalAlpha = 1
-            context.globalCompositeOperation = 'source-over'
-            context.clearRect(0, 0, width, height)
-            context.drawImage(image, 0, 0, width, height)
-            context.globalCompositeOperation = 'destination-in'
-            context.drawImage(mask, 0, 0)
-            context.globalCompositeOperation = 'source-over'
+            paint()
           }
-          if (progress < 1) frame = requestAnimationFrame(draw)
-          else finished()
+          if (progress < 1 && strokeIndex < paths.length) frame = requestAnimationFrame(draw)
+          else setStatus('Finished drawing')
         }
         frame = requestAnimationFrame(draw)
       }
-      finished()
       if (!preference.matches) {
         observer = new IntersectionObserver((entries) => {
           if (entries.some((entry) => entry.isIntersecting)) {
             observer?.disconnect()
             replay.current()
           }
-        }, { threshold: 0.3 })
-        if (section.current) observer.observe(section.current)
+        }, { threshold: 0.2 })
+        if (figure.current) observer.observe(figure.current)
       }
-    }
-    const onPreference = () => {
-      if (preference.matches) replay.current()
-    }
+    }).catch(() => {
+      // Keep the normal image visible if geometry or scripting is unavailable.
+      if (!disposed) setReady(false)
+    })
+    const onPreference = () => { if (preference.matches) replay.current() }
     preference.addEventListener('change', onPreference)
-    image.onerror = () => { if (!disposed) setStatus('The study could not be loaded.') }
-    image.src = '/studies/ink-study.png'
     return () => {
       disposed = true
+      controller.abort()
       cancelAnimationFrame(frame)
       observer?.disconnect()
       preference.removeEventListener('change', onPreference)
@@ -105,14 +148,13 @@ export function InkStudy() {
   }, [])
 
   return (
-    <section className="ink-study" ref={section} aria-labelledby="ink-title">
-      <div className="ink-study-heading">
-        <h2 id="ink-title">A little ink</h2>
-        <button className="ink-replay" type="button" onClick={() => replay.current()}>Replay drawing</button>
+    <figure className={'ink-art' + (ready ? ' is-ready' : '')} id="drawing" ref={figure} aria-label="Flowers and cottage ink drawing">
+      <div className="ink-artwork">
+        <Image className="ink-source" src="/studies/ink-study.png" width={1774} height={887} alt="Delicate cream ink wildflowers beside a small cottage." unoptimized />
+        <canvas ref={canvas} className="ink-canvas" aria-hidden="true" />
       </div>
-      <canvas ref={canvas} className="ink-canvas" role="img" aria-label="Illustrative cream ink drawing of wildflowers and a small cottage gradually appearing on dark sage green." />
-      <p className="ink-caption">An illustrative study of flowers and a little cottage.</p>
+      <button className="ink-replay" type="button" disabled={!ready} onClick={() => replay.current()}>Replay drawing</button>
       <span className="visually-hidden" role="status">{status}</span>
-    </section>
+    </figure>
   )
 }

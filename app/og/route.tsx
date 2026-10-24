@@ -1,8 +1,10 @@
 import { ImageResponse } from 'next/og'
 import { profile } from '../content/profile'
 
-export function GET(request: Request) {
-  const title = new URL(request.url).searchParams.get('title')?.slice(0, 100) || profile.name
+export const dynamic = 'force-static'
+
+export function GET() {
+  const title = profile.name
   return new ImageResponse(
     (
       <div style={{ display: 'flex', width: '100%', height: '100%', flexDirection: 'column', justifyContent: 'center', padding: 90, background: '#3d5145', color: '#f2edda' }}>
