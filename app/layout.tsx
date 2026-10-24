@@ -1,65 +1,44 @@
 import './global.css'
-import type { Metadata } from 'next'
-import { GeistSans } from 'geist/font/sans'
-import { GeistMono } from 'geist/font/mono'
+import type { Metadata, Viewport } from 'next'
 import { Navbar } from './components/nav'
 import { Analytics } from '@vercel/analytics/react'
 import { SpeedInsights } from '@vercel/speed-insights/next'
 import Footer from './components/footer'
-import { baseUrl } from './sitemap'
+import { profile } from './content/profile'
 
 export const metadata: Metadata = {
-  metadataBase: new URL(baseUrl),
-  title: {
-    default: 'Next.js Portfolio Starter',
-    template: '%s | Next.js Portfolio Starter',
-  },
-  description: 'This is my portfolio.',
+  metadataBase: new URL(profile.url),
+  title: { default: profile.name, template: '%s | ' + profile.name },
+  description: profile.description,
+  authors: [{ name: profile.name, url: profile.linkedIn }],
+  alternates: { canonical: '/' },
   openGraph: {
-    title: 'My Portfolio',
-    description: 'This is my portfolio.',
-    url: baseUrl,
-    siteName: 'My Portfolio',
+    title: profile.name,
+    description: profile.description,
+    url: profile.url,
+    siteName: profile.name,
     locale: 'en_US',
     type: 'website',
+    images: [{ url: '/og', width: 1200, height: 630, alt: profile.name }],
   },
-  robots: {
-    index: true,
-    follow: true,
-    googleBot: {
-      index: true,
-      follow: true,
-      'max-video-preview': -1,
-      'max-image-preview': 'large',
-      'max-snippet': -1,
-    },
-  },
+  twitter: { card: 'summary_large_image', title: profile.name, description: profile.description, images: ['/og'] },
+  robots: { index: true, follow: true },
 }
 
-const cx = (...classes) => classes.filter(Boolean).join(' ')
+export const viewport: Viewport = { themeColor: '#3d5145' }
 
-export default function RootLayout({
-  children,
-}: {
-  children: React.ReactNode
-}) {
+export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html
-      lang="en"
-      className={cx(
-        'text-black bg-white dark:text-white dark:bg-black',
-        GeistSans.variable,
-        GeistMono.variable
-      )}
-    >
-      <body className="antialiased max-w-xl mx-4 mt-8 lg:mx-auto">
-        <main className="flex-auto min-w-0 mt-6 flex flex-col px-2 md:px-0">
+    <html lang="en">
+      <body>
+        <a className="skip-link" href="#content">Skip to content</a>
+        <div className="site-shell">
           <Navbar />
-          {children}
+          <main id="content">{children}</main>
           <Footer />
-          <Analytics />
-          <SpeedInsights />
-        </main>
+        </div>
+        <Analytics />
+        <SpeedInsights />
       </body>
     </html>
   )

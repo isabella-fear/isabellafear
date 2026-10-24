@@ -1,5 +1,6 @@
 import { baseUrl } from 'app/sitemap'
 import { getBlogPosts } from 'app/blog/utils'
+import { profile } from 'app/content/profile'
 
 export async function GET() {
   let allBlogs = await getBlogPosts()
@@ -27,9 +28,9 @@ export async function GET() {
   const rssFeed = `<?xml version="1.0" encoding="UTF-8" ?>
   <rss version="2.0">
     <channel>
-        <title>My Portfolio</title>
+        <title>${profile.name}</title>
         <link>${baseUrl}</link>
-        <description>This is my portfolio RSS feed</description>
+        <description>Writing by ${profile.name}</description>
         ${itemsXml}
     </channel>
   </rss>`

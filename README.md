@@ -1,42 +1,36 @@
-# Portfolio Blog Starter
+# Isabella Fear
 
-This is a porfolio site template complete with a blog. Includes:
+A personal introduction website built with Next.js, Times New Roman, and dark sage green. The homepage introduces Isabella's interests in law, constitutionalism, and knowledge, with a minimal Experience section and links to LinkedIn and email.
 
-- MDX and Markdown support
-- Optimized for SEO (sitemap, robots, JSON-LD schema)
-- RSS Feed
-- Dynamic OG images
-- Syntax highlighting
-- Tailwind v4
-- Vercel Speed Insights / Web Analytics
-- Geist font
+## Run locally
 
-## Demo
+Install dependencies from `pnpm-lock.yaml` using pnpm, then run:
 
-https://portfolio-blog-starter.vercel.app
-
-## How to Use
-
-You can choose from one of the following two methods to use this repository:
-
-### One-Click Deploy
-
-Deploy the example using [Vercel](https://vercel.com?utm_source=github&utm_medium=readme&utm_campaign=vercel-examples):
-
-[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https://github.com/vercel/examples/tree/main/solutions/blog&project-name=blog&repository-name=blog)
-
-### Clone and Deploy
-
-Execute [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app) with [pnpm](https://pnpm.io/installation) to bootstrap the example:
-
-```bash
-pnpm create next-app --example https://github.com/vercel/examples/tree/main/solutions/blog blog
+```sh
+npm run dev -- --hostname 127.0.0.1 --port 3017
 ```
 
-Then, run Next.js in development mode:
+Open http://127.0.0.1:3017. The development server updates the page when files change.
 
-```bash
-pnpm dev
+```sh
+npm run build
+npm run start
 ```
 
-Deploy it to the cloud with [Vercel](https://vercel.com/templates) ([Documentation](https://nextjs.org/docs/app/building-your-application/deploying)).
+The production build includes TypeScript validation.
+
+## Update content
+
+- `app/page.tsx`: personal introduction, About Me, education, and community material.
+- `app/content/profile.ts`: contact links, site URL, work experience, dates, and leadership roles.
+- `app/global.css`: shared colors, Times New Roman typography, and responsive layouts.
+
+Experience was checked against Isabella's LinkedIn profile on October 24, 2026; direct corrections supplied by the user take precedence. No responsibilities are invented for entries whose source only lists a title.
+
+## Artwork and animation
+
+The homepage includes a nine-second, scroll-triggered ink reveal near the footer, with a replay control. The user explicitly selected the generated cottage/flower study for the published site. It is labelled as an illustrative study; it is not presented as Isabella's own artwork. The generation prompt is embedded in the PNG. The animation preserves the image and reveals small regions; it does not reconstruct an original pen-stroke sequence. True stroke-by-stroke animation needs a stroke-based SVG or a carefully traced mask. Reduced-motion preferences show the completed drawing immediately.
+
+## Publishing
+
+The existing GitHub repository has a Vercel integration. Commit and push to the existing `main` branch, then check that the Vercel commit status succeeds. Repository write access does not by itself guarantee deployment permission in the owner's Vercel account. Keep the owner's existing project and domain; do not create a duplicate project.
