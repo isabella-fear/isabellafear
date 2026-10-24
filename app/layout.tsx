@@ -39,8 +39,8 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           <main id="content">{children}</main>
           <Footer />
         </div>
-        <Analytics />
-        <SpeedInsights />
+        {process.env.PAGES_EXPORT !== '1' && <Analytics />}
+        {process.env.PAGES_EXPORT !== '1' && <SpeedInsights />}
       </body>
     </html>
   )

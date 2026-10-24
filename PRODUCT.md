@@ -12,15 +12,17 @@ Professional contacts, potential collaborators, and people seeking a balanced pe
 
 ## Product Purpose
 
-A personal portfolio introducing Isabella and presenting her experience, education, athletics, leadership, and community involvement in one readable page. Contact happens through her existing LinkedIn profile and user-supplied email address.
+A personal portfolio introducing Isabella and presenting her experience and education in one readable page, with personal context in the introduction and About Me copy. Contact happens through her existing LinkedIn profile and user-supplied email address.
 
 ## Capabilities and Constraints
 
-- Keep the existing Next.js App Router application and Vercel deployment.
+- Keep the existing Next.js App Router application and Vercel deployment. A static export and guarded GitHub Pages workflow are prepared for the exact separate repository `isabellafear/isabellafear.github.io`; that repository is inaccessible from the current account and the user cannot arrange access now. Do not claim that address is live.
 - Work on the existing main branch and commit and push completed changes.
 - Use only verified experience; do not invent responsibilities, achievements, personal interests, contact information, or a portrait.
 - LinkedIn is the content source, not a runtime dependency. Content is maintained in the repository.
-- The user selected Times New Roman and the sage palette from saykig.github.io, then clarified that the site must lead with a personable “Hello, I'm Isabella.” greeting, taking lessons from saykig.github.io and williamjblair.github.io. Experience belongs farther down in a minimal section called “Experience”. Small LinkedIn and email links belong beneath the introduction.
+- The user selected Times New Roman and the sage palette from saykig.github.io, then clarified that the site must lead with a personable “Hello, I'm Isabella.” greeting, taking lessons from saykig.github.io and williamjblair.github.io. Experience belongs farther down in a minimal section called “Experience”. Small LinkedIn and email links belong beneath the introduction. The greeting and Isabella’s name are upright. The user removed the entire Beyond work section, including community details; Education remains beside Experience.
+- The user selected the generated floral and cottage ink study for publication. Preserve its original PNG directly on the continuous ground without a heading, caption, border, or panel. Reveal 606 traced centre-line strokes sequentially over 48 seconds, with replay below the art at the right, a normal-image fallback, and immediate completion under reduced motion. The study is not attributed to Isabella; the traced geometry does not establish the original artist’s pen order.
+- Fine-pointer devices use the user-requested gavel cursor.
 
 ## Evidence on Hand
 

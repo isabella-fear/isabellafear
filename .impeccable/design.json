@@ -1,6 +1,6 @@
 {
   "schemaVersion": 2,
-  "generatedAt": "2026-10-24T21:58:57.231062+00:00",
+  "generatedAt": "2026-10-24T22:16:16.771860+00:00",
   "title": "Design System: Isabella Fear",
   "extensions": {
     "colorMeta": {
@@ -78,7 +78,7 @@
     "typographyMeta": {
       "display": {
         "displayName": "Greeting",
-        "purpose": "Large introduction, with the name in italic."
+        "purpose": "Large upright introduction at regular weight."
       },
       "headline": {
         "displayName": "Section heading",
@@ -109,8 +109,8 @@
     "motion": [
       {
         "name": "ink-reveal-duration",
-        "value": "9000ms",
-        "purpose": "User-selected scattered raster ink mask; begins once at a 0.3 intersection threshold and can be replayed."
+        "value": "48000ms",
+        "purpose": "Sequential reveal of 606 traced centre-line strokes over the unchanged selected PNG; begins once at a 0.2 intersection threshold and can be replayed. Traced geometry does not recover original pen order."
       },
       {
         "name": "ink-reveal-reduced-motion",
@@ -138,9 +138,9 @@
       "name": "Greeting",
       "kind": "custom",
       "refersTo": "greeting",
-      "description": "Large regular serif greeting with the name in italic; the personable first impression.",
-      "html": "<section class=\"ds-preview\"><h1 class=\"ds-greeting\">Hello, I’m <em>Isabella.</em></h1><p class=\"ds-intro\">I’m an aspiring lawyer interested in law, constitutionalism, and how knowledge is interpreted and built upon over time.</p></section>",
-      "css": ".ds-preview{background:var(--paper,#3d5145);color:var(--ink,#f2edda);font-family:var(--font-serif,'Times New Roman',Times,serif);font-size:18px;line-height:1.6;padding:24px;}.ds-greeting{margin:0;font-weight:400;font-size:clamp(56px,7.3vw,94px);line-height:1.2;letter-spacing:-.035em;text-wrap:balance;}.ds-greeting em{font-weight:400;}.ds-intro{max-width:640px;margin:36px 0 0;font-size:24px;line-height:1.55;}@media(max-width:600px){.ds-greeting{font-size:clamp(54px,11.8vw,70px);max-width:10ch;}.ds-intro{margin-top:30px;font-size:22px;}}"
+      "description": "Large regular upright serif greeting; the personable first impression.",
+      "html": "<section class=\"ds-preview\"><h1 class=\"ds-greeting\">Hello, I’m Isabella.</h1><p class=\"ds-intro\">I’m an aspiring lawyer interested in law, constitutionalism, and how knowledge is interpreted and built upon over time.</p></section>",
+      "css": ".ds-preview{background:var(--paper,#3d5145);color:var(--ink,#f2edda);font-family:var(--font-serif,'Times New Roman',Times,serif);font-size:18px;line-height:1.6;padding:24px;}.ds-greeting{margin:0;font-weight:400;font-size:clamp(56px,7.3vw,94px);line-height:1.2;letter-spacing:-.035em;text-wrap:balance;}.ds-intro{max-width:640px;margin:36px 0 0;font-size:24px;line-height:1.55;}@media(max-width:600px){.ds-greeting{font-size:clamp(54px,11.8vw,70px);max-width:10ch;}.ds-intro{margin-top:30px;font-size:22px;}}"
     },
     {
       "name": "Contact and explore links",
@@ -159,28 +159,27 @@
       "css": ".ds-preview{background:var(--paper,#3d5145);color:var(--ink,#f2edda);font-family:var(--font-serif,'Times New Roman',Times,serif);font-size:18px;line-height:1.6;padding:24px;}.ds-experience{border-block:1px solid var(--line,#6c7d69);}.ds-summary{position:relative;padding:21px 26px 21px 0;display:flex;align-items:baseline;justify-content:space-between;gap:20px;cursor:pointer;list-style:none;}.ds-summary::-webkit-details-marker{display:none;}.ds-summary::after{content:\"+\";position:absolute;right:1px;top:24px;color:var(--copy,#d3dbc9);font-size:16px;line-height:1.5;}.ds-experience[open] .ds-summary::after{content:\"−\";}.ds-label{min-width:0;}.ds-role{display:block;font-size:19px;line-height:1.4;}.ds-organization{display:block;margin-top:4px;color:var(--copy,#d3dbc9);font-size:16px;line-height:1.45;}.ds-year{flex-shrink:0;color:var(--copy,#d3dbc9);font-size:14px;white-space:nowrap;}.ds-summary:hover .ds-role{text-decoration:underline;text-underline-offset:4px;}.ds-summary:focus-visible{outline:2px solid var(--ink,#f2edda);outline-offset:6px;border-radius:1px;}.ds-detail{padding:0 25px 22px 0;color:var(--copy,#d3dbc9);font-size:16px;}.ds-meta{margin:0;font-size:15px;}@media(max-width:800px){.ds-summary{flex-wrap:wrap;gap:7px;}.ds-label{flex-basis:100%;}}@media(max-width:600px){.ds-summary{flex-wrap:nowrap;gap:14px;padding-block:19px;}.ds-label{flex-basis:auto;}.ds-role{font-size:18px;}.ds-year{font-size:13px;}}@media(max-width:380px){.ds-summary{flex-wrap:wrap;gap:6px;}.ds-label{flex-basis:100%;}}"
     },
     {
-      "name": "Community disclosure",
+      "name": "Education",
       "kind": "custom",
-      "refersTo": "community-disclosure",
-      "description": "Quiet native disclosure with the browser marker and underlined summary for supporting community detail.",
-      "html": "<div class=\"ds-preview\"><details class=\"ds-community\"><summary class=\"ds-community-summary\">Community &amp; leadership</summary><div class=\"ds-community-detail\"><h3 class=\"ds-community-heading\">SheIS Sports Network</h3><p class=\"ds-date\">Volunteer · December 2022–September 2023</p><p class=\"ds-community-copy\">Researched sports laws and athlete information while supporting the representation of female athletes.</p></div></details></div>",
-      "css": ".ds-preview{background:var(--paper,#3d5145);color:var(--ink,#f2edda);font-family:var(--font-serif,'Times New Roman',Times,serif);font-size:18px;line-height:1.6;padding:24px;}.ds-community{color:var(--copy,#d3dbc9);font-size:16px;}.ds-community-summary{cursor:pointer;text-decoration:underline;text-underline-offset:5px;padding-block:6px;}.ds-community-summary:hover{text-decoration-thickness:2px;}.ds-community-summary:focus-visible{outline:2px solid var(--ink,#f2edda);outline-offset:6px;border-radius:1px;}.ds-community-detail{margin-top:21px;}.ds-community-heading{margin:0;color:var(--ink,#f2edda);font-size:18px;font-weight:400;line-height:1.45;}.ds-date{margin:7px 0 0;font-size:15px;}.ds-community-copy{margin:7px 0 0;font-size:16px;}"
+      "description": "Quiet unboxed supporting education column beside experience, stacking below on small screens.",
+      "html": "<aside class=\"ds-education\" aria-label=\"Education\"><h2 class=\"ds-education-title\">Education</h2><p class=\"ds-school\">University of Toronto</p><p class=\"ds-subject\">Political Science and Economics</p><p class=\"ds-date\">September 2021–April 2026</p><p class=\"ds-school ds-earlier-school\">Copenhagen International School</p><p class=\"ds-date\">August 2015–June 2020</p></aside>",
+      "css": ".ds-education{background:var(--paper,#3d5145);color:var(--copy,#d3dbc9);font-family:var(--font-serif,'Times New Roman',Times,serif);font-size:17px;line-height:1.6;padding:24px;min-width:0;}.ds-education-title{margin:0 0 23px;color:var(--ink,#f2edda);font-size:25px;font-weight:400;line-height:1.35;}.ds-school,.ds-subject,.ds-date{margin:0;}.ds-education p+p{margin-top:7px;}.ds-date{font-size:15px;}.ds-education .ds-earlier-school{margin-top:19px;}@media(max-width:600px){.ds-education{max-width:55ch;}.ds-education-title{font-size:24px;margin-bottom:19px;}}"
     },
     {
       "name": "Ink study replay",
       "kind": "button",
       "refersTo": "replay-button",
-      "description": "Transparent underlined replay action from the selected ink study. The live canvas uses a nine-second reveal and immediately completes under reduced motion.",
-      "html": "<div class=\"ds-preview ds-art-heading\"><h2 class=\"ds-art-title\">A little ink</h2><button class=\"ds-replay\" type=\"button\">Replay drawing</button></div>",
-      "css": ".ds-preview{background:var(--paper,#3d5145);color:var(--ink,#f2edda);font-family:var(--font-serif,'Times New Roman',Times,serif);font-size:18px;line-height:1.6;padding:24px;}.ds-art-heading{display:flex;justify-content:space-between;align-items:baseline;flex-wrap:wrap;gap:16px;}.ds-art-title{margin:0;font-size:25px;font-weight:400;line-height:1.35;}.ds-replay{color:var(--copy,#d3dbc9);font:inherit;font-size:15px;background:transparent;border:0;padding:8px 0;text-decoration:underline;text-underline-offset:5px;cursor:pointer;}.ds-replay:hover{text-decoration-thickness:2px;}.ds-replay:focus-visible{outline:2px solid var(--ink,#f2edda);outline-offset:5px;}@media(max-width:600px){.ds-art-title{font-size:24px;}}"
+      "description": "Transparent underlined replay action below the art at the right. The unchanged generated study appears directly on the continuous ground without heading, caption, border, or panel; its sequential 48-second traced-stroke reveal has a normal-image fallback and immediately completes under reduced motion.",
+      "html": "<div class=\"ds-preview\"><button class=\"ds-replay\" type=\"button\">Replay drawing</button></div>",
+      "css": ".ds-preview{background:var(--paper,#3d5145);color:var(--ink,#f2edda);font-family:var(--font-serif,'Times New Roman',Times,serif);font-size:18px;line-height:1.6;padding:24px;}.ds-replay{display:block;margin:10px 0 0 auto;color:var(--copy,#d3dbc9);font:inherit;font-size:15px;background:transparent;border:0;padding:8px 0;text-decoration:underline;text-underline-offset:5px;cursor:pointer;}.ds-replay:hover{text-decoration-thickness:2px;}.ds-replay:focus-visible{outline:2px solid var(--ink,#f2edda);outline-offset:5px;}.ds-replay:disabled{opacity:.6;cursor:default;}"
     }
   ],
   "narrative": {
     "northStar": "Personal introduction",
-    "overview": "The user-selected direction is personable, spacious, and literary. Times New Roman carries the whole voice on one plain dark sage ground; cream type, italic emphasis, and generous space establish hierarchy. The interface feels like an introduction to a person, with professional detail available at a quieter scale.\n\nFlat, unboxed content and fine rules keep the page easy to read. Small underlined links and native disclosures supply the interaction vocabulary. The selected cream-line flower and cottage study shares this restrained palette; its scattered-ink reveal is a local expressive moment, rather than a general entrance-animation system. The implementation and the confirmed direction in `.impeccable/surfaces/home.md` are the authority for these rules.",
+    "overview": "The user-selected direction is personable, spacious, and literary. Times New Roman carries the whole voice on one plain dark sage ground; cream type, regular upright lettering, and generous space establish hierarchy. The interface feels like an introduction to a person, with professional detail available at a quieter scale.\n\nFlat, unboxed content and fine rules keep the page easy to read. Small underlined links and native disclosures supply the interaction vocabulary. The selected cream-line flower and cottage study shares this restrained palette; its sequential traced-stroke reveal is a local expressive moment. The implementation and the confirmed direction in `.impeccable/surfaces/home.md` are the authority for these rules.",
     "keyCharacteristics": [
       "One plain dark sage ground with cream and muted secondary type.",
-      "Times New Roman throughout, with a large greeting and italic name.",
+      "Times New Roman throughout, with a large upright greeting.",
       "Generous space, fine rules, and unboxed content.",
       "Underlined text actions and keyboard-accessible native disclosures.",
       "A selected illustrative ink study with replay and reduced-motion support."
@@ -204,10 +203,10 @@
     ],
     "dos": [
       "Do retain the approved dark sage ground, cream primary type, and quiet secondary copy.",
-      "Do use Times New Roman throughout and let size, italic emphasis, and space create hierarchy.",
+      "Do use Times New Roman throughout and let size, regular upright type, and space create hierarchy.",
       "Do keep text links underlined and keyboard focus visible.",
-      "Do use native disclosures for expandable experience and community detail.",
-      "Do preserve the selected study's replay, illustrative labelling, and immediate completed state for reduced motion."
+      "Do use native disclosures for expandable experience detail.",
+      "Do preserve the selected study’s unchanged PNG, replay below the art at the right, normal-image fallback, and immediate completed state for reduced motion."
     ],
     "donts": [
       "Don't introduce card grids, raised panels, or elaborate backgrounds into this restrained world.",
